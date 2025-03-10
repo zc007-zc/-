@@ -1,0 +1,84 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>0310-CSS</title>
+    <style>
+        #d1{
+            width:300px;
+            height:100px;
+            background-color:#ecc0c0ea;
+        }
+        .grad{
+            width:300px;
+            height:100px;
+            margin:10px 0px;
+            border: 1px solid black;
+            display:inline-block;
+        }
+        .anim {
+            width:300px;
+            height:100px;
+            margin:10px 0px;
+        }
+        #d2{
+            background: linear-gradient(red,yellow);
+        }
+        #d3{
+            background: linear-gradient(90deg,red,orange,yellow,green,blue,purple);
+        }
+        #d4{
+            background: linear-gradient(90deg,red 30%,white 30%,white 70%,blue 70%);
+        }
+        #d5{
+            background: repeating-linear-gradient(45deg,red 45%,white 50%,red 55%);
+        }
+        #r1{
+            background: radial-gradient(yellow,white,black);
+        }
+        #r2{
+            background: radial-gradient(circle,yellow,white,black);
+        }
+        #r3{
+            background: repeating-radial-gradient(circle,yellow 30%,white 40%,yellow 50%);
+        }
+        #c1{
+            background: conic-gradient(red,orange,yellow,green,blue,purple,red);
+        }
+        #c2{
+            background: conic-gradient(from 60deg,red,orange,yellow,green,blue,purple,red);
+        }
+        #c3{
+            background: repeating-conic-gradient(red 10%,white 15%,red 20%);
+        }
+        #a1{
+            background: repeating-linear-gradient(45deg,red 10%,white 15%,red 20%);
+        }
+        @keyframes k1{
+            0%{}
+        }
+        /* css colar
+           1.name
+           2.#HEX 00-FF
+           3.rgb(r,g,b)0-255
+           4.rgba(r,g,b,a 0-1)
+           5.hsl(色相0-360,彩度0-100%,亮度0-100%)
+           6.hsla(h,s,l,可見度0-1)
+        */
+    </style>
+</head>
+<body>
+    <div id="d1"></div>
+    <div id="d2" class="grad"></div>
+    <div id="d3" class="grad"></div>
+    <div id="d4" class="grad"></div>
+    <div id="d5" class="grad"></div>
+    <div id="r1" class="grad"></div>
+    <div id="r2" class="grad"></div>
+    <div id="r3" class="grad"></div>
+    <div id="c1" class="grad"></div>
+    <div id="c2" class="grad"></div>
+    <div id="c3" class="grad"></div>
+
+    <div id="a1" class="anim"></div>
+</body>
+</html>
