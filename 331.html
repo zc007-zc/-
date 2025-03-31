@@ -1,0 +1,51 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>331-JS輸出入</title>
+    <style>
+
+
+    </style>
+    <script>
+    
+    function hello(name,elm){
+        //elm=document.getElementById("msg");
+        elm.innerHTML="hello "+name;
+        //alert("hello "+name);
+        
+        
+        //console.log("hello "+name)
+        
+        
+        //prompt("你是誰?","阿倫");
+        //if(confirm("你確定嗎?")){
+            //alert("你按了確定");
+        //}else{
+            //alert("你按了取消");
+        //}
+        
+        } 
+        function add(a,b){
+            return a+b;
+        }
+        function calc(){
+            elm1=document.getElementById("n1");
+            elm2=document.getElementById("n2");
+            elmans=document.getElementById("ans");
+            n1=parseInt(elm1.value);
+            if(isNaN(n1)) n1=0;
+            n2=parseInt(elm2.value);
+            if(isNaN(n2)) n2=0;
+            elmans.value=add(n1,n2);
+        }
+    </script>
+</head>
+<body>
+    <button onclick="hello('jake',this);">打招呼</button>
+    <div id="msg"></div>
+    <input type="text" id="n1">+<input type="text" id="n2">
+    <button onlick="calc();">等於</button>
+    <input type="text" id="ans">
+    
+</body>
+</html>
