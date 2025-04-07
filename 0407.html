@@ -1,0 +1,32 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>0407-JS事件</title>
+    <style>
+        #mouseCanvas{
+            width:600px;
+            height:600px;
+            border:1px solid black;
+        }
+
+    </style>
+    <script>
+        function btnClick(btn){
+            alert(btn.innerHTML+"按鈕被按下");
+        }
+        function msMove(){
+            msPos=document.getElementById("mousePos");
+            msPos.innerHTML=;
+        }
+    </script>
+</head>
+<body>
+    <button onclick="btnClick(this);">按鈕1</button>
+    <button onclick="btnClick(this);">按鈕2</button>
+    <div id="mousePos">(x,y)</div>
+    <div id="mouseCanvas" onmousemove="msMove();"></div>
+
+
+    
+</body>
+</html>
