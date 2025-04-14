@@ -3,18 +3,29 @@
     <meta charset="UTF-8">
     <title>0414-JS計時</title>
     <style>
-       
+       #timer{
+        font-size: 64pt;
+       }
     </style>
     <script>
-        function func2(){
-            console.log("func2");
-        }
-        function func1(){
+        function timestart(){
+            time=0;
+            setInterval(function(){
+                time++;
+                mm=time/60;
+                ss=time%60;
+                document.getElementById()
+        })}
+                
+        
+        function timestop(){
             setTimeout(clearInterval,5000,setInterval(func2,1000));
         }
     </script>
 </head>
 <body>
-    <button onclick="func1();">計時</button>
+    <div>00:00</div>
+    <button onclick="timestart();">開始</button>
+    <button onclick="timestop();">停止</button>
 </body>
 </html>
