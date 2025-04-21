@@ -1,0 +1,31 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>翻牌</title>
+    <style>
+   #board{
+        display:grid;
+        grid :repeat(3,90px) / repeat(4,90px);
+        
+   }
+    
+    </style>
+    <script>
+        function gameInit(){
+            cards=[1,1,2,2,3,3,4,4,5,5,6,6];
+            cards.sort((a,b)=>(math.random()-0.5))
+
+            b=document.getElementById("board");
+            for(i=0;i<cards.length;i++){
+                a=document.createElement("img");
+                a.src=`pic/${cards[i]}.png`;
+                b.appendChild(a);
+            }
+        }
+    </script>
+</head>
+<body onload="gameInit();">
+    <div id="board"></div>
+    
+</body>
+</html>
