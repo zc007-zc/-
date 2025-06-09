@@ -1,69 +1,88 @@
 <html>
 <head>
+    <title>0310筆記-CSS</title>
     <meta charset="UTF-8">
-    <title>0310-CSS</title>
     <style>
-        #d1{
+        #d1 {
             width:300px;
             height:100px;
-            background-color:#ecc0c0ea;
+            background-color:rgba(255,0,0,0.5);
         }
-        .grad{
-            width:300px;
-            height:100px;
-            margin:10px 0px;
-            border: 1px solid black;
-            display:inline-block;
+        .grad {
+            width: 300px;
+            height: 100px;
+            margin: 10px 0px;
+            display: inline-block;
         }
-        .anim {
-            width:300px;
-            height:100px;
-            margin:10px 0px;
-        }
-        #d2{
+        #d2 {
             background: linear-gradient(red,yellow);
         }
-        #d3{
-            background: linear-gradient(90deg,red,orange,yellow,green,blue,purple);
+        #d3 {
+            background: linear-gradient(90deg,red,orange,yellow,green,blue,indigo,violet);
         }
-        #d4{
-            background: linear-gradient(90deg,red 30%,white 30%,white 70%,blue 70%);
+        #d4 {
+            background: linear-gradient(90deg,red 30%,white 40%, white 60%,blue 70%);
         }
-        #d5{
+        #d5 {
             background: repeating-linear-gradient(45deg,red 45%,white 50%,red 55%);
         }
-        #r1{
+        #r1 {
             background: radial-gradient(yellow,white,black);
         }
-        #r2{
-            background: radial-gradient(circle,yellow,white,black);
+        #r2 {
+            background: radial-gradient(circle,yellow,white 30%,black);
         }
-        #r3{
-            background: repeating-radial-gradient(circle,yellow 30%,white 40%,yellow 50%);
+        #r3 {
+            background: repeating-radial-gradient(circle,gray 30%,white 35%,gray 40%);
         }
-        #c1{
-            background: conic-gradient(red,orange,yellow,green,blue,purple,red);
+        #c1 {
+            background: conic-gradient(red,green,blue,red);
         }
-        #c2{
-            background: conic-gradient(from 60deg,red,orange,yellow,green,blue,purple,red);
+        #c2 {
+            background: conic-gradient(from 60deg,red,green,blue,red);
         }
-        #c3{
+        #c3 {
             background: repeating-conic-gradient(red 10%,white 15%,red 20%);
         }
-        #a1{
-            background: repeating-linear-gradient(45deg,red 10%,white 15%,red 20%);
+
+        .anim {
+            width:400px;
+            height: 100px;
+            margin: 10px 0px;
         }
-        @keyframes k1{
-            0%{}
+        #a1 {
+            background: repeating-linear-gradient(45deg,red 45%,white 50%,green 55%,white 60%,red 65%);
+            animation: k1 1s infinite linear;
         }
-        /* css colar
-           1.name
-           2.#HEX 00-FF
-           3.rgb(r,g,b)0-255
-           4.rgba(r,g,b,a 0-1)
-           5.hsl(色相0-360,彩度0-100%,亮度0-100%)
-           6.hsla(h,s,l,可見度0-1)
-        */
+        @keyframes k1 {
+            0% {background: repeating-linear-gradient(45deg,red 45%,white 50%,green 55%,white 60%,red 65%);}
+            25% {background: repeating-linear-gradient(45deg,white 45%,red 50%,white 55%,green 60%,white 65%);}
+            50% {background: repeating-linear-gradient(45deg,green 45%,white 50%,red 55%,white 60%,green 65%);}
+            75% {background: repeating-linear-gradient(45deg,white 45%,green 50%,white 55%,red 60%,white 65%);}
+            100% {background: repeating-linear-gradient(45deg,red 45%,white 50%,green 55%,white 60%,red 65%);}
+        }
+        #a2 {
+            background: radial-gradient(circle,yellow,white 30%,black);
+            animation: k2 1s linear infinite;
+        }
+        @keyframes k2 {
+            0%{background: radial-gradient(circle,green,white 30%,black);}
+            17%{background: radial-gradient(circle,green,white 45%,black);}
+            33%{background: radial-gradient(circle,green,white 60%,black);}
+            50%{background: radial-gradient(circle,green,white 75%,black);}
+            67%{background: radial-gradient(circle,green,white 60%,black);}
+            83%{background: radial-gradient(circle,green,white 45%,black);}
+            100%{background: radial-gradient(circle,green,white 30%,black);}
+        }
+        #a3 {
+            background: repeating-conic-gradient(red 10%,white 15%,red 20%);
+            animation: k3 0.2s linear infinite;
+        }
+        @keyframes k3 {
+            0%{background: repeating-conic-gradient(red 10%,white 15%,red 20%);}
+            50%{background: repeating-conic-gradient(white 10%,red 15%,white 20%);}
+            100%{background: repeating-conic-gradient(red 10%,white 15%,red 20%);}
+        }
     </style>
 </head>
 <body>
@@ -78,7 +97,9 @@
     <div id="c1" class="grad"></div>
     <div id="c2" class="grad"></div>
     <div id="c3" class="grad"></div>
-
+    <hr>
     <div id="a1" class="anim"></div>
+    <div id="a2" class="anim"></div>
+    <div id="a3" class="anim"></div>
 </body>
 </html>

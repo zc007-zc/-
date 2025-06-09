@@ -1,32 +1,50 @@
 <html>
 <head>
+    <title>0407-JS Events</title>
     <meta charset="UTF-8">
-    <title>0407-JS事件</title>
     <style>
         #mouseCanvas{
             width:600px;
             height:600px;
             border:1px solid black;
         }
-
     </style>
     <script>
-        function btnClick(btn){
-            alert(btn.innerHTML+"按鈕被按下");
+        function btnClick1() {
+            alert("按鈕被按下了！");
         }
-        function msMove(){
+        function btnClick2(btn=null) {
+            btnName=(btn)?(btn.innerHTML):("按鈕");
+            alert(btnName+"被按下了！");
+        }
+        function msMove() {
             msPos=document.getElementById("mousePos");
-            msPos.innerHTML=;
+            msPos.innerHTML=`(${event.offsetX},${event.offsetY})`;
+        }
+        function kbDown() {
+            kbOut=document.getElementById("kbOut");
+            kbOut.innerHTML=event.key;
+        }
+        function pageReady() {
+            console.log("page ready!");
         }
     </script>
 </head>
-<body>
-    <button onclick="btnClick(this);">按鈕1</button>
-    <button onclick="btnClick(this);">按鈕2</button>
+<body onload="pageReady();">
+    <button onclick="btnClick2();">按鈕</button>
+    <button onclick="btnClick2(this);">按鈕1</button>
+    <button onclick="btnClick2(this);">按鈕2</button>
+    <hr>
+
     <div id="mousePos">(x,y)</div>
     <div id="mouseCanvas" onmousemove="msMove();"></div>
+    <hr>
 
-
+    <input type="text" id="kbIn" placeholder="kbIn" onkeydown="kbDown();">
+    <div id="kbOut">kbOut</div>
     
+    <script>
+        console.log("page loading!");
+    </script>
 </body>
 </html>

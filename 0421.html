@@ -1,31 +1,63 @@
 <html>
 <head>
+    <title>翻牌記憶遊戲</title>
     <meta charset="UTF-8">
-    <title>翻牌</title>
     <style>
-   #board{
-        display:grid;
-        grid :repeat(3,90px) / repeat(4,90px);
-        
-   }
-    
+        #board {
+            display: grid;
+            grid: repeat(3,90px) / repeat(4,90px);
+        }
     </style>
     <script>
-        function gameInit(){
+        function gameInit() {
             cards=[1,1,2,2,3,3,4,4,5,5,6,6];
-            cards.sort((a,b)=>(math.random()-0.5))
-
-            b=document.getElementById("board");
-            for(i=0;i<cards.length;i++){
-                a=document.createElement("img");
-                a.src=`pic/${cards[i]}.png`;
+            var b=document.getElementById("board");
+            for(i=0;i<cards.length;i++) {
+                var a=document.createElement("img");
+                a.className="card";
+                a.src=`pic/0.png`;
+                a.addEventListener("click",pickImg);
                 b.appendChild(a);
+            }
+            imgs=Array.from(document.getElementsByClassName("card"));
+            gameStarting=false;
+        }
+        function gameStart() {
+            cards.sort((a,b)=>(Math.random()-0.5));
+            for(i=0;i<imgs.length;i++) {
+                imgs[i].src=`pic/${cards[i]}.png`;
+            }
+            setTimeout(function(){
+                imgs.forEach(img=>{img.src="pic/0.png";});
+            },3000);
+            gameStarting=true;
+            p1=-1;p2=-1;
+        }
+        function pickImg() {
+            if(!gameStarting || p2!=-1) return;
+            img=event.target;
+            idx=imgs.indexOf(img);
+            if(p1==-1) {
+                p1=idx;
+                img.src=`pic/${cards[p1]}.png`;
+            } else {
+                p2=idx;
+                img.src=`pic/${cards[p2]}.png`;
+                if(cards[p1]==cards[p2]) {
+                    p1=-1;p2=-1;
+                } else {
+                    setTimeout(function(){
+                        imgs[p1].src="pic/0.png";
+                        imgs[p2].src="pic/0.png";
+                        p1=-1;p2=-1;
+                    },1000);
+                }
             }
         }
     </script>
 </head>
 <body onload="gameInit();">
     <div id="board"></div>
-    
+    <button onclick="gameStart();">遊戲開始</button>
 </body>
 </html>

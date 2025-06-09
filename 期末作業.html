@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="time">30</p>
+
+<script>
+  let t = 30;
+  setInterval(function() {
+    if (t > 0) {
+      t--;
+      document.getElementById("time").innerHTML = t;
+    }
+  }, 1000);
+</script>
+
+</body>
+</html>
