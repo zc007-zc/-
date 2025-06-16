@@ -1,18 +1,58 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-<p id="time">30</p>
-
-<script>
-  let t = 30;
-  setInterval(function() {
-    if (t > 0) {
-      t--;
-      document.getElementById("time").innerHTML = t;
+<head>
+  <meta charset="UTF-8">
+  <title>點擊方塊遊戲</title>
+  <style>
+    #game {
+      width: 400px;
+      height: 400px;
+      background: lightblue;
+      position: relative;
+      overflow: hidden;
     }
-  }, 1000);
-</script>
+    .block {
+      width: 40px;
+      height: 40px;
+      background: red;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <h2>分數：<span id="score">0</span></h2>
+  <h3>倒數：<span id="time">30</span> 秒</h3>
+  <div id="game"></div>
 
+  <script>
+    let score = 0;
+    let time = 30;
+    let timer = setInterval(() => {
+      time--;
+      document.getElementById("time").innerText = time;
+      if (time === 0) {
+        clearInterval(timer);
+        clearInterval(blockMaker);
+        alert("時間到！分數：" + score);
+      }
+    }, 1000);
+
+    let game = document.getElementById("game");
+
+    function makeBlock() {
+      let block = document.createElement("div");
+      block.className = "block";
+      block.style.left = Math.random() * 360 + "px";
+      block.style.top = Math.random() * 360 + "px";
+      block.onclick = function() {
+        score++;
+        document.getElementById("score").innerText = score;
+        block.remove();
+      };
+      game.appendChild(block);
+      setTimeout(() => block.remove(), 1500)};
+
+    let blockMaker = setInterval(makeBlock, 800);
+  </script>
 </body>
 </html>

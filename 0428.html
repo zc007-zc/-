@@ -1,29 +1,122 @@
 <html>
 <head>
+    <title>0428筆記-打字遊戲</title>
     <meta charset="UTF-8">
-    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Relief&display=swap" rel="stylesheet">
     <style>
-        .word{
+        #status {
+            display: none;
+            background: hsla(120,50%,80%);
+            padding: 5px;
+        }
+        #input {
+            float: right;
+        }
+        .word {
             display: inline-block;
             padding: 5px 10px;
-            border: 5px solid gray;
+            background-color: white;
             text-align: center;
             font-size: 32pt;
-            font-family: Arial, Helvetica, sans-serif;
-            position: relative;
+            font-family: "Comic Relief", system-ui;
+            position: absolute;
+        }
+        red {
+            color:red;
         }
     </style>
     <script>
-        function KbDown(){
-            //console.iog(event.key);
+        input="";
+        gameTime=0;
+        wordCount=0;
+        function kbDown() {
             event.preventDefault();
+            words=Array.from(document.getElementsByClassName("word"));
+            words.forEach(function(w){
+                w.innerHTML=w.innerText;
+            });
+            if(event.key=="Enter") {
+                words.filter(function(w){
+                    return w.innerText==input;
+                }).forEach(function(w){
+                    clearInterval(w.move);
+                    w.remove();
+                    document.getElementById("wordCount").innerHTML=(++wordCount);
+                });
+                input="";
+            } else if(event.key=="Backspace") {
+                input=input.substr(0,input.length-1);
+            } else if(event.key.length == 1){
+                var code=event.key.charCodeAt(0);
+                if((code>=65 && code<=90) || (code>=97 && code<=122)) {
+                    input+=event.key;
+                }
+            }
+            words.filter(function(w){
+                return w.innerText.startsWith(input);
+            }).forEach(function(w){
+                w.innerHTML=`<red>${input}</red>` + w.innerText.substr(input.length);
+            });
+            document.getElementById("input").innerHTML=input;
         }
-        function gameStart(){
-            
+        function rand(min,max) {
+            return Math.floor(Math.random()*(max-min+1))+min;
+        }
+        function genWord() {
+            /*
+            var wordlist=["hello", "world","apple","banana","cake"];
+            var idx=Math.floor(Math.random() * wordlist.length);
+            return wordlist[idx];
+            */
+           var len=rand(3,9);
+           var str="";
+           for(i=0; i<len; i++) {
+                var CAPS=[65,97];
+                var randnum=rand(0,25)+CAPS[rand(0,1)];
+                str+=String.fromCharCode(randnum);
+           }
+           return str;
+        }
+        function newWord() {
+            var a=document.createElement("div");
+            a.className="word";
+            a.innerHTML=genWord();
+            a.pos={x:rand(10,document.body.offsetWidth-250),y:70};
+            a.style.left=a.pos.x+"px";
+            a.style.top=a.pos.y+"px";
+            a.move=setInterval(function(o){
+                o.pos.y+=1;
+                o.style.top=o.pos.y+"px";
+                if(o.pos.y > (document.body.offsetHeight-100)) {
+                    clearInterval(o.move);
+                    o.remove();
+                }
+            },100,a);
+            document.body.appendChild(a);
+        }
+        function gameStart() {
             document.getElementById("btnStart").style.display="none";
+            document.getElementById("status").style.display="block";
+            input="";
+            gameTime=0;
+            wordCount=0;
+            t1=setInterval(newWord,3000);
+            setInterval(function(){
+                document.getElementById("gameTime").innerHTML=(++gameTime);
+                if(gameTime==60) {
+                    clearInterval(t1);
+                    t1=setInterval(newWord,1000);
+                } else if(gameTime==30) {
+                    clearInterval(t1);
+                    t1=setInterval(newWord,2000);
+                }
+            },1000);
         }
     </script>
 </head>
-<body onkeydown="KbDown();"><button id="btnStart" onluck="gameStart();">開始</div>
+<body onkeydown="kbDown();">
+    <div id="status">經過時間：<span id="gameTime">0</span>秒　　正確字數：<span id="wordCount">0</span>字　<span id="input"></span></div>
+    <button id="btnStart" onclick="gameStart();">遊戲開始</button>
 </body>
 </html>

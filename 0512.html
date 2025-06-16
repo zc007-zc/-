@@ -1,22 +1,57 @@
 <html>
 <head>
+    <title>0512-精靈圖</title>
     <meta charset="UTF-8">
-    <title></title>
     <style>
+        body {
+            background-image: url("pic/grass.jpg");
+            background-size: 200px 140px;
+            position: relative;
+        }
         #role{
-            border: 1px solid red;
             width: 48px;
             height: 72px;
             background: url("pic/sprite1.png");
+            background-position-y: 0px;
+            animation: walking 0.7s steps(3) infinite;
+            position: absolute;
         }
-        
+        @keyframes walking {
+            0%{background-position-x: -288px;}
+            100%{background-position-x: -432px;}
+        }
     </style>
     <script>
-    
+        function gameInit() {
+            role=document.getElementById("role");
+            role.pos={x:0, y:0};
+            role.faceTo=-1; /* Stop */
+            role.move=setInterval(function(){
+                if(role.faceTo < 0) return;
+                var dx=[0,-1,1,0];
+                var dy=[1,0,0,-1];
+                role.pos.x += dx[role.faceTo];
+                role.pos.y += dy[role.faceTo];
+                role.style.left=role.pos.x+"px";
+                role.style.top=role.pos.y+"px";
+            },50);
+        }
+        function mykeydown() {
+            event.preventDefault();
+            var key=event.key;
+            var dir=["ArrowDown","ArrowLeft","ArrowRight","ArrowUp"];
+            if(dir.includes(key)) {
+                role.faceTo=dir.indexOf(key);
+                role.style.backgroundPositionY=`-${role.faceTo * 72}px`;
+            }
+        }
+        function mykeyup() {
+            role.faceTo=-1;
+            role.style.backgroundPositionY="0px";
+        }
     </script>
 </head>
-<body>
+<body onload="gameInit();" onkeydown="mykeydown();" onkeyup="mykeyup();">
     <div id="role"></div>
-    
 </body>
 </html>
